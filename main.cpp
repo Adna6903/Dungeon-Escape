@@ -20,9 +20,25 @@ int main()
       
        mainTeam = actionMenu(mainTeam,map1);
        
+       if(mainTeam.getSorcererAngerLevel()<100&&mainTeam.getPlayers().size()>=1)
+       {
         
          endGame(mainTeam);
+       }
 
+       else if(mainTeam.getSorcererAngerLevel()>=100)
+       {
+    
+        cout<<"GAME OVER"<<endl;
+        return 0;
+
+       }
+       else if(mainTeam.getPlayers().size()<1)
+       {
+       
+        cout<<"GAME OVER"<<endl;
+        return 0;
+       }
          return 0;
 
  }

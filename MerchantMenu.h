@@ -557,9 +557,194 @@ Team merchantMenu(Team x, int numLevelsCleared)
                     break;
             
             case 3:
-                        int choice3;
+            {
+                        int choice3 = 0;
+
+                      
                     
-                    cout<<"I have a plentiful collection of weapons to choose from, what would you like?"<<endl;
+                  
+
+                    if(x.getWeapons().size()==5)
+                    {
+                        cout<<"You already have 5 weapons, would you like to remove one?(y/n)"<<endl;
+                        char yesOrNo = 'x';
+                        while(yesOrNo!='y'&&yesOrNo!='n')
+                        {
+                            cin>>yesOrNo;
+                            if(yesOrNo!='y'&&yesOrNo!='n')
+                            {
+                            cout<<"Invalid Input"<<endl;
+                            cin>>yesOrNo;
+                            }
+                        }
+                        if(yesOrNo=='y')
+                        {       
+                                int weaponRemoveIndex = 6;
+                                while(weaponRemoveIndex>5||weaponRemoveIndex<1)
+                                {
+                                cout<<"Which weapon do you want to remove?"<<endl;
+                                cout<<"1) "<<x.getWeapons().at(0).getName()<<" 2) "<<x.getWeapons().at(1).getName()<<" 3) "<<x.getWeapons().at(2).getName()<<" 4) "<<x.getWeapons().at(3).getName()<<" 5) "<<x.getWeapons().at(4).getName()<<endl;
+                                cin>>weaponRemoveIndex;
+
+                                    if(weaponRemoveIndex>5||weaponRemoveIndex<1)
+                                    {
+                                        cout<<"invalid Input."<<endl;
+                                    }
+
+                                }
+
+                               switch(weaponRemoveIndex)
+                               {
+                                    case 1: 
+                                            if(x.getWeapons().at(0).getName()=="Club")
+                                            {
+                                                CWeaponQuantity--;
+                                            }
+                                            if(x.getWeapons().at(0).getName()=="Battle Axe")
+                                            {
+                                                BWeaponQuantity--;
+                                            }
+                                            if(x.getWeapons().at(0).getName()=="Spear")
+                                            {
+                                                SWeaponQuantity--;
+                                            }
+                                            if(x.getWeapons().at(0).getName()=="Rapier")
+                                            {
+                                                RWeaponQuantity--;
+                                            }
+                                            if(x.getWeapons().at(0).getName()=="Longsword")
+                                            {
+                                                LWeaponQuantity--;
+                                            }
+                                               x.removeWeaponsAt(0);
+                                               
+                                               
+
+                                                break;
+
+                                    case 2: 
+
+                                                if(x.getWeapons().at(1).getName()=="Club")
+                                            {
+                                                CWeaponQuantity--;
+                                            }
+                                            if(x.getWeapons().at(1).getName()=="Battle Axe")
+                                            {
+                                                BWeaponQuantity--;
+                                            }
+                                            if(x.getWeapons().at(1).getName()=="Spear")
+                                            {
+                                                SWeaponQuantity--;
+                                            }
+                                            if(x.getWeapons().at(1).getName()=="Rapier")
+                                            {
+                                                RWeaponQuantity--;
+                                            }
+                                            if(x.getWeapons().at(1).getName()=="Longsword")
+                                            {
+                                                LWeaponQuantity--;
+                                            }
+                                                 x.removeWeaponsAt(1);
+
+                                                break;
+                                    
+                                    case 3: 
+
+                                                if(x.getWeapons().at(2).getName()=="Club")
+                                            {
+                                                CWeaponQuantity--;
+                                            }
+                                            if(x.getWeapons().at(2).getName()=="Battle Axe")
+                                            {
+                                                BWeaponQuantity--;
+                                            }
+                                            if(x.getWeapons().at(2).getName()=="Spear")
+                                            {
+                                                SWeaponQuantity--;
+                                            }
+                                            if(x.getWeapons().at(2).getName()=="Rapier")
+                                            {
+                                                RWeaponQuantity--;
+                                            }
+                                            if(x.getWeapons().at(2).getName()=="Longsword")
+                                            {
+                                                LWeaponQuantity--;
+                                            }
+                                                x.removeWeaponsAt(2);
+
+                                                break;
+
+                                    case 4: 
+
+                                                if(x.getWeapons().at(3).getName()=="Club")
+                                            {
+                                                CWeaponQuantity--;
+                                            }
+                                            if(x.getWeapons().at(3).getName()=="Battle Axe")
+                                            {
+                                                BWeaponQuantity--;
+                                            }
+                                            if(x.getWeapons().at(3).getName()=="Spear")
+                                            {
+                                                SWeaponQuantity--;
+                                            }
+                                            if(x.getWeapons().at(3).getName()=="Rapier")
+                                            {
+                                                RWeaponQuantity--;
+                                            }
+                                            if(x.getWeapons().at(3).getName()=="Longsword")
+                                            {
+                                                LWeaponQuantity--;
+                                            }
+                                                x.removeWeaponsAt(3);
+
+                                                break;
+
+                                    case 5: 
+
+                                                if(x.getWeapons().at(4).getName()=="Club")
+                                            {
+                                                CWeaponQuantity--;
+                                            }
+                                            if(x.getWeapons().at(4).getName()=="Battle Axe")
+                                            {
+                                                BWeaponQuantity--;
+                                            }
+                                            if(x.getWeapons().at(4).getName()=="Spear")
+                                            {
+                                                SWeaponQuantity--;
+                                            }
+                                            if(x.getWeapons().at(4).getName()=="Rapier")
+                                            {
+                                                RWeaponQuantity--;
+                                            }
+                                            if(x.getWeapons().at(4).getName()=="Longsword")
+                                            {
+                                                LWeaponQuantity--;
+                                            }
+                                                x.removeWeaponsAt(4);
+
+                                                break;
+
+                                    default:
+
+                                                break;
+                                                
+                                     }
+
+                        }
+                        if(yesOrNo=='n')
+                        {
+                            choice3 = 6;
+                            break;
+                        
+                        }
+
+                    }
+
+                      int weaponInventory = x.getWeapons().size(); 
+                        cout<<""<<endl;
+                      cout<<"I have a plentiful collection of weapons to choose from, what would you like?"<<endl;
                     cout<<"Note that some of them provide you a special bonus in combat, marked by a (+X)."<<endl;
                     cout<<""<<endl;
 
@@ -586,7 +771,7 @@ Team merchantMenu(Team x, int numLevelsCleared)
                     switch(choice3)
                     {   
                         case 1:
-                                while(quantity<0)
+                                while(quantity<0||quantity+weaponInventory>5)
                                 {
                                 cout<<"How many would you like? (Enter a positive integer, or 0 to cancel)"<<endl;
                                 yesOrNo = 'x';
@@ -597,7 +782,7 @@ Team merchantMenu(Team x, int numLevelsCleared)
                                     break;
                                     
                                 }
-                                else if(quantity>0)
+                                else if(quantity>0&&quantity+weaponInventory<=5)
                                 {
                                     while(yesOrNo!='y'&& yesOrNo!='n')
                                     {
@@ -645,6 +830,10 @@ Team merchantMenu(Team x, int numLevelsCleared)
                                     }
                                     }
                                 }
+                                else if(quantity+weaponInventory>5)
+                                {
+                                    cout<<"You can only have a maximum of 5 weapons!"<<endl;
+                                }
 
                                 else
                                 {
@@ -656,7 +845,7 @@ Team merchantMenu(Team x, int numLevelsCleared)
                                 break;
 
                             case 2:
-                                     while(quantity<0)
+                                     while(quantity<0||quantity+weaponInventory>5)
                                 {
                                 cout<<"How many would you like? (Enter a positive integer, or 0 to cancel)"<<endl;
                                 yesOrNo = 'x';
@@ -667,7 +856,7 @@ Team merchantMenu(Team x, int numLevelsCleared)
                                     break;
                                     
                                 }
-                                else if(quantity>0)
+                                else if(quantity>0&&quantity+weaponInventory<=5)
                                 {
                                     while(yesOrNo!='y'&& yesOrNo!='n')
                                     {
@@ -716,6 +905,11 @@ Team merchantMenu(Team x, int numLevelsCleared)
                                     }
                                 }
 
+                                else if(quantity+weaponInventory>5)
+                                {
+                                    cout<<"You can only have a maximum of 5 weapons!"<<endl;
+                                }
+
                                 else
                                 {
 
@@ -727,7 +921,7 @@ Team merchantMenu(Team x, int numLevelsCleared)
                                     break;
 
                             case 3:
-                                     while(quantity<0)
+                                     while(quantity<0||quantity+weaponInventory>5)
                                 {
                                 cout<<"How many would you like? (Enter a positive integer, or 0 to cancel)"<<endl;
                                 yesOrNo = 'x';
@@ -738,7 +932,7 @@ Team merchantMenu(Team x, int numLevelsCleared)
                                     break;
                                     
                                 }
-                                else if(quantity>0)
+                                else if(quantity>0&&quantity+weaponInventory<=5)
                                 {
                                     while(yesOrNo!='y'&& yesOrNo!='n')
                                     {
@@ -787,6 +981,11 @@ Team merchantMenu(Team x, int numLevelsCleared)
                                     }
                                 }
 
+                                else if(quantity+weaponInventory>5)
+                                {
+                                    cout<<"You can only have a maximum of 5 weapons!"<<endl;
+                                }
+
                                 else
                                 {
 
@@ -798,7 +997,7 @@ Team merchantMenu(Team x, int numLevelsCleared)
                                     break;
 
                             case 4:
-                                     while(quantity<0)
+                                     while(quantity<0||quantity+weaponInventory>5)
                                 {
                                 cout<<"How many would you like? (Enter a positive integer, or 0 to cancel)"<<endl;
                                 yesOrNo = 'x';
@@ -809,7 +1008,7 @@ Team merchantMenu(Team x, int numLevelsCleared)
                                     break;
                                     
                                 }
-                                else if(quantity>0)
+                                else if(quantity>0&&quantity+weaponInventory<=5)
                                 {
                                     while(yesOrNo!='y'&& yesOrNo!='n')
                                     {
@@ -858,6 +1057,11 @@ Team merchantMenu(Team x, int numLevelsCleared)
                                     }
                                 }
 
+                                else if(quantity+weaponInventory>5)
+                                {
+                                    cout<<"You can only have a maximum of 5 weapons!"<<endl;
+                                }
+
                                 else
                                 {
 
@@ -869,7 +1073,7 @@ Team merchantMenu(Team x, int numLevelsCleared)
                                     break;
 
                             case 5:
-                                     while(quantity<0)
+                                     while(quantity<0||quantity+weaponInventory>5)
                                 {
                                 cout<<"How many would you like? (Enter a positive integer, or 0 to cancel)"<<endl;
                                 yesOrNo = 'x';
@@ -880,7 +1084,7 @@ Team merchantMenu(Team x, int numLevelsCleared)
                                     break;
                                     
                                 }
-                                else if(quantity>0)
+                                else if(quantity>0&&quantity+weaponInventory<=5)
                                 {
                                     while(yesOrNo!='y'&& yesOrNo!='n')
                                     {
@@ -929,6 +1133,11 @@ Team merchantMenu(Team x, int numLevelsCleared)
                                     }
                                 }
 
+                                else if(quantity+weaponInventory>5)
+                                {
+                                    cout<<"You can only have a maximum of 5 weapons!"<<endl;
+                                }
+
                                 else
                                 {
 
@@ -945,7 +1154,7 @@ Team merchantMenu(Team x, int numLevelsCleared)
                     }
                 }
 
-                               
+            }         
 
                     break;
             

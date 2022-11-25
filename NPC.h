@@ -47,33 +47,35 @@ void NPC(Team exTeam)
         lineSegment_a[1] = "";
     }
 
-    int riddleIndex = rand() % 20 + 1;
+    int riddleIndex = rand() % 20;
+  
    
     cout << "Here is my riddle " << listOfRiddles.at(riddleIndex) << endl;
     cout<<correctResponse.at(riddleIndex)<<endl;
-
+    string response = "";
+    cin >> response;
+    cout<<"--------------"<<endl;
     string CorrectResponse = correctResponse.at(riddleIndex);
 
-  
-
-    string response;
-    cin >> response;
-    cout<<response;
-    cout<<CorrectResponse;
-   
-    if (response == CorrectResponse)
+    cout<<response<<endl;
+    string Response = response;
+    if (Response == CorrectResponse.substr(0,Response.length()))
     {
        
         cout << "Correct!" << endl;
         // If the riddle is corrrect go to merchant menu
         int roomsCleared = exTeam.getNumRoomsCleared();
         merchantMenu(exTeam, roomsCleared);
+        cout<<""<<endl;
         return;
     }
-    else
+    else if(response!=correctResponse.at(riddleIndex))
     {
-        
-       
+       int x = Response.compare(CorrectResponse);
+       cout<<x<<endl;
+  
+       cout<<Response.length()<<endl;
+       cout<<CorrectResponse.length()<<endl;
         Monster randomMonster = getRandomMonster(exTeam.getNumRoomsCleared(),exTeam);
         attack(exTeam, randomMonster);
 

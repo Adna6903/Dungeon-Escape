@@ -50,7 +50,7 @@ Team investigate(Team x,Map map)
         else if (roomsCleared == 2)
         {
             cout << "You found a ruby necklace!" << endl;
-            cout << "You found a ruby necklace!" << endl;
+          
             vector <string> currentTreassures = x.getTreasures();
             currentTreassures.push_back("ruby necklace");
             x.setTreasures(currentTreassures);
@@ -59,7 +59,7 @@ Team investigate(Team x,Map map)
          else if (roomsCleared == 3)
         {
             cout << "You found a emerald bracelet!" << endl;
-            cout << "You found a emerald bracelet!" << endl;
+            
             vector <string> currentTreassures = x.getTreasures();
             currentTreassures.push_back("emerald bracelet");
             x.setTreasures(currentTreassures);
@@ -67,7 +67,7 @@ Team investigate(Team x,Map map)
          else if (roomsCleared == 4)
         {
             cout << "You found a diamond circlet!" << endl;
-            cout << "You found a diamond circlet!" << endl;
+            
             vector <string> currentTreassures = x.getTreasures();
             currentTreassures.push_back("diamond circlet");
             x.setTreasures(currentTreassures);
@@ -75,26 +75,39 @@ Team investigate(Team x,Map map)
          else if (roomsCleared == 5)
         {
             cout << "You found a gem-encrusted goblet!" << endl;
-            cout << "You found a gem-encrusted goblet!" << endl;
+     
             vector <string> currentTreassures = x.getTreasures();
             currentTreassures.push_back("gem-encrusted goblet");
             x.setTreasures(currentTreassures);
         }
 
     }
+
+        if(randomNumber>30&randomNumber<=80)
+        {
+            cout<<"Oh no! each player has lost a fullness point"<<endl;
+            //50% chance each player looses a fulness point
+        for (int i = 0; i < x.getPlayers().size(); i++)
+        {
+                x.setPlayerFullnessPointsAt(x.getPlayers().at(i).getFullnessPoints()-1,i)
+        }
+
+        }
+
+          //Spawn a monster;
+    if(randomNumber >= 30 && randomNumber <= 50)
+    {
+         Monster randomMonster = getRandomMonster(x.getNumRoomsCleared(),x);
+            attack(x,randomMonster);
     }
 
-    //Spawn a monster;
-    // if(randomNumber >= 30 && randomNumber <= 50)
-    // {
 
-    // }
+
+    }
+
+   
     
-    // //50% chance each player looses a fulness point
-    // for (int i = 0; i < x.getPlayers().size(); i++)
-    // {
-        
-    // }
+    
 
     return x;
 

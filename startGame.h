@@ -21,6 +21,8 @@ Team startGame()
     string nameThree;
     Player playerFour;
     string nameFour;
+    Player playerFive;
+    string nameFive;
 
     //Get and Set player names:
     cout << "Player one, what is your name?" << endl;
@@ -37,7 +39,13 @@ Team startGame()
 
     cout << "Player four, what is your name?" << endl;
     cin >> nameFour;
+  
     playerFour.setPlayerName(nameFour);
+   
+
+    cout << "Player five, what is your name?" << endl;
+    cin >> nameFive;
+    playerFive.setPlayerName(nameFive);
 
     //Create a vector of players
     vector<Player> thePlayers; 
@@ -46,7 +54,9 @@ Team startGame()
     thePlayers.push_back(playerTwo);
     thePlayers.push_back(playerThree);
     thePlayers.push_back(playerFour);
+    thePlayers.push_back(playerFive);
 
+   
     //Pass the vecotr of players into "theTeam" class object
     Team theTeam(thePlayers);
 

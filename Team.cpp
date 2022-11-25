@@ -189,3 +189,10 @@ void Team::removeCookwareAt(int index)
 
 
 }
+
+void Team::removeWeaponsAt(int index)
+{
+
+    weapons_.erase(weapons_.begin()+index);
+
+}

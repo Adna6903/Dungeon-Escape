@@ -76,7 +76,7 @@ public:
     void removeTreasureAt(int index);
     void setPlayerFullnessPointsAt(int fullnessPoints,int index);
     void removeCookwareAt(int index);
-
+    void removeWeaponsAt(int index);
 
     //Universal setter
    

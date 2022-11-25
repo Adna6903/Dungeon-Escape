@@ -13,8 +13,12 @@
 #include <time.h>
 #include "status.h"
 #include "misfortune.h"
+#include<chrono>
+#include<thread>
+ 
 
-
+using namespace std::this_thread;     // sleep_for
+using namespace std::chrono_literals;
 using namespace std;
 /*
 ask for what the user wants to do
@@ -30,7 +34,7 @@ BONUS: you already have one case and the outer while loops
        
     
    
-   
+
     char movement = ' ';
     cout << "Room #: " << map.getRoomCount() << endl;
     int numRooms = 0;
@@ -104,7 +108,7 @@ BONUS: you already have one case and the outer while loops
         if (x.getKeys()==0)
         {
             cout<<"You do not have any keys to enter the room"<<endl;
-            return x;
+           
         }
         else{
        
@@ -279,10 +283,35 @@ BONUS: you already have one case and the outer while loops
          }
                 break;
             case 2:
-            {
+            {       
                         
                         x = investigate(x,map);
                         map.exploreSpace(map.getPlayerRow(),map.getPlayerCol(),x);
+                         if(x.getPlayers().size()<=0)
+        {
+                cout<<"ALL PLAYERS HAVE DIED"<<endl;
+                return x;
+        }
+
+        if(map.isDungeonExit(map.getPlayerRow(),map.getPlayerCol(),x)&&x.getNumRoomsCleared()==5)
+        {
+            cout<<"congrats! you have finished the game!"<<endl;
+          
+        }
+
+        else
+        if(map.isDungeonExit(map.getPlayerRow(),map.getPlayerCol(),x)&&x.getNumRoomsCleared()!=5)
+        {
+                cout<<"Clear all rooms to exit the dungeon"<<endl;
+        }
+
+        if(x.getSorcererAngerLevel()>=100)
+        {
+            cout<<"Sorcerer has gotten very angry"<<endl;
+              
+                return x;
+
+        }
                         status(x);
                         map.displayMap();
             }            
@@ -293,6 +322,31 @@ BONUS: you already have one case and the outer while loops
                         Monster rand;
                         rand = getRandomMonster(x.getNumRoomsCleared(),x);
                        x =  attack(x,rand);
+                        if(x.getPlayers().size()<=0)
+        {
+                cout<<"ALL PLAYERS HAVE DIED"<<endl;
+                return x;
+        }
+
+        if(map.isDungeonExit(map.getPlayerRow(),map.getPlayerCol(),x)&&x.getNumRoomsCleared()==5)
+        {
+            cout<<"congrats! you have finished the game!"<<endl;
+          
+        }
+
+        else
+        if(map.isDungeonExit(map.getPlayerRow(),map.getPlayerCol(),x)&&x.getNumRoomsCleared()!=5)
+        {
+                cout<<"Clear all rooms to exit the dungeon"<<endl;
+        }
+
+        if(x.getSorcererAngerLevel()>=100)
+        {
+            cout<<"Sorcerer has gotten very angry"<<endl;
+              
+                return x;
+
+        }
                        status(x);
                         map.displayMap();
             }           
@@ -330,7 +384,7 @@ BONUS: you already have one case and the outer while loops
         }
 
 
-
+   
 
         return x;
     }

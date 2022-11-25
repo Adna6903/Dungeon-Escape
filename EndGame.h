@@ -53,7 +53,7 @@ void endGame(Team exTeam)
     int place;
     // Team name
     string teamName;
-    cout<<count;
+  
 
     for (int i = 0; i < count; i++)
     {
@@ -61,7 +61,7 @@ void endGame(Team exTeam)
         {
 
             place = i;
-            cout << "New High Score! You finished in " << i+1 << "place." << endl;
+            cout << "New High Score! You finished in " << i+1 << " place." << endl;
             cout << "Enter a name for the leaderboard" << endl;
             cin >> teamName;
             newHighscore << teamName << "," << exTeam.getSorcererAngerLevel() << endl;
@@ -83,7 +83,7 @@ void endGame(Team exTeam)
         if (i == place)
         {
             sortLeaderboard << teamName << "," << exTeam.getSorcererAngerLevel() << endl;
-            i--;
+           
         }
         else
         {
