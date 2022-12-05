@@ -1,9 +1,8 @@
 // CSCI 1300 Fall 2022
-// Author: Adithya Narayanan
-// Recitation: 106 –Chanheum Park
-// Author: Benjamin E Apelman 
-// Recitation: Section 105 – Raegan Rychecky
-// Project 3 Code Skeleton
+// Author: Adithya Narayanan & Benjamin E Apelman 
+// Recitation: 106 –Chanheum Park (Adithya)
+// Recitation: Section 105 – Raegan Rychecky (Benjamin)
+// Project 3 
 
 #include <iostream>
 #include "Player.h"
@@ -15,7 +14,7 @@ using namespace std;
         {
             
             
-            fullnessPoints_ = 100;
+            fullnessPoints_ = 50;
             playerName_ = "";
 
 

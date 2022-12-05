@@ -1,9 +1,8 @@
 // CSCI 1300 Fall 2022
-// Author: Adithya Narayanan
-// Recitation: 106 –Chanheum Park
-// Author: Benjamin E Apelman 
-// Recitation: Section 105 – Raegan Rychecky
-// Project 3 Code Skeleton
+// Author: Adithya Narayanan & Benjamin E Apelman 
+// Recitation: 106 –Chanheum Park (Adithya)
+// Recitation: Section 105 – Raegan Rychecky (Benjamin)
+// Project 3 
 
 #ifndef TEAM_H
 #define TEAM_H
@@ -24,6 +23,8 @@ private:
     
     vector<Player> players_;
 
+    string mainPlayerName_;
+
     int numRoomsCleared_;
 
     int sorcererAngerLevel_;
@@ -42,6 +43,22 @@ private:
 
     vector<int> armor_;
 
+    bool hasPlayerGivenUp;
+
+    int potions_;
+
+     vector<string> listOfRiddles_;
+
+    vector<string> listOfMonsters_;
+
+    int spacesExplored_;
+
+    int numMonstersDefeated_;
+
+    int turnsElapsed_;
+
+
+
 public:
 
     
@@ -57,9 +74,19 @@ public:
     int getKeys();
     int getGold();
     vector<string> getCookware();
+    
     int getIngredients();
     vector<int> getArmor();
     vector <Player> getPlayers();
+    bool getGiveUp();
+    int getPotions();
+     vector<string>getMonster();
+    vector<string>getRiddle();
+    string getMainPlayerName();
+    int getSpacesExplored();
+    int getNumMonstersDefeated();
+    int getNumTurnsElapsed();
+    
 
     // Setters:
    
@@ -77,6 +104,18 @@ public:
     void setPlayerFullnessPointsAt(int fullnessPoints,int index);
     void removeCookwareAt(int index);
     void removeWeaponsAt(int index);
+    void setGiveUp(bool isGiveUp);
+    void removeArmorAt(int index);
+    void setPotions(int potions);
+    void setRiddles(vector<string> listOfRiddles);
+    void setMonsters(vector<string> listOfMonsters);
+    void eraseRiddleAt(int index );
+    void eraseMonsterAt(int index);
+    void clearPlayers();
+    void setSpacesExplored(int spaces);
+    void setNumMonstersDefeated(int numMonsters);
+    void setTurnsElapsed(int turns);
+
 
     //Universal setter
    

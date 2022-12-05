@@ -1,10 +1,28 @@
+// CSCI 1300 Fall 2022
+// Author: Adithya Narayanan & Benjamin E Apelman 
+// Recitation: 106 –Chanheum Park (Adithya)
+// Recitation: Section 105 – Raegan Rychecky (Benjamin)
+// Project 3 
+
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include "Team.h"
-#include "Weapons.h"
+
 #include "Player.h"
 #include "Merchant.h"
 
+/** Algorithm:
+ * Create four player objects
+ * Prompt the user for a name for each player
+ * Set each players name
+ * Pass each player into a vector of players
+ * Pass that vector into the Team constructor
+ * Read the riddles.txt file and pass it as a vector into team as a datamember
+ * read the monsters.txt file and pass it as a vector into team as a datamember
+ * Return the team
+ * 
+*/
 
 
 using namespace std;
@@ -60,6 +78,48 @@ Team startGame()
     //Pass the vecotr of players into "theTeam" class object
     Team theTeam(thePlayers);
 
+
+    //Add a vector of riddles to the team
+    fstream riddles;
+    riddles.open("riddles.txt");
+
+    vector <string> riddlesList;
+
+    while(!riddles.eof())
+        {
+            string line;
+            getline(riddles, line);
+
+            if(line != "")
+            {
+            riddlesList.push_back(line);
+            }
+
+            line = "";
+        }
+
+        theTeam.setRiddles(riddlesList);
+
+    //Add a vector of monsters to the team
+
+    fstream monsters;
+    monsters.open("Monsters.txt");
+
+    vector<string> monstersList; 
+
+    while(!monsters.eof())
+    {
+        string line;
+        getline(monsters,line);
+
+        if(line != "")
+        {
+            monstersList.push_back(line);
+        }
+        line = "";
+    }
+
+    theTeam.setMonsters(monstersList);
 
     return theTeam;
 }

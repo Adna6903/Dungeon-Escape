@@ -1,13 +1,29 @@
+// CSCI 1300 Fall 2022
+// Author: Adithya Narayanan & Benjamin E Apelman 
+// Recitation: 106 –Chanheum Park (Adithya)
+// Recitation: Section 105 – Raegan Rychecky (Benjamin)
+// Project 3 
 
 #include <iostream>
+#include <limits>
+#include <ios>
 #include "Team.h"
 #include "Player.h"
-#include "Weapons.h"
-#include "Merchant.h"
 
+#include "Merchant.h"
+#include <stdlib.h>
 using namespace std;
 
 
+/** Algorithm:
+ * Prompt the user to get supplies
+ * Display the menu
+ * If the user chooses to buy something, ask what quanitity they want
+ * Check that the input is valid
+ * Check that there is enough gold for the purchase
+ * If they sucsessfully purchase something add that to the coresponding team member variable
+ * Loop this untill the user chooses to exit
+*/
 
 Team merchantMenu(Team x, int numLevelsCleared)
     {
@@ -16,21 +32,6 @@ Team merchantMenu(Team x, int numLevelsCleared)
 
     merchant.setMenuCost(numLevelsCleared);
         
-   
-
-    
-
-    vector<string> Treasure = {"Silver ring", "Emerald bracelet", "Silver ring", "Gem-encrusted goblet","Diamond circlet", "Ruby necklace" };
-
-
-   
-
-   
-
-    
-    
-   
-    x.setTreasures(Treasure);
 
         int option =7;
         int armorQuantity = 0;
@@ -184,7 +185,7 @@ Team merchantMenu(Team x, int numLevelsCleared)
 
          for(int i = 0; i<x.getWeapons().size(); i++)
         {
-            if(x.getWeapons()[i].getName()=="Bettle Axe")
+            if(x.getWeapons()[i].getName()=="Battle Axe")
             {
                 BWeaponQuantity++;
 
@@ -210,7 +211,7 @@ Team merchantMenu(Team x, int numLevelsCleared)
 
           
 
-         
+        
         
 
     do {
@@ -232,7 +233,21 @@ Team merchantMenu(Team x, int numLevelsCleared)
         cout<<"4. Armor: If you want to survive monster attacks, you will need some armor."<<endl;
         cout<<"5. Sell treasures: If you find anything shiny, I would be happy to take it off your hands."<<endl;
         cout<<"6. Leave: Make sure you get everything you need, I'm leaving after this sale!"<<endl;
-        cin >> option;
+
+        string temp;
+
+        cin >> temp;
+           if (temp == "1"||temp=="2"||temp=="3"||temp=="4"||temp == "5"||temp=="6")
+        {
+            option = stoi(temp);
+        }
+
+        else
+        {
+            option = 7;
+        }
+        
+        
     if (option < 1 || option > 6) {
         cout << "Invalid Input." << endl;
     }
@@ -247,6 +262,12 @@ Team merchantMenu(Team x, int numLevelsCleared)
                     {
                     cout<<"How many kg of ingredients do you need ["<<merchant.getFoodCost()<<" Gold/kg]? (Enter a positive mulitple of 5, or 0 to cancel)"<<endl;
                     cin>>quantity;
+                    cin.clear();
+                        if(cin.ignore(numeric_limits<streamsize>::max(), '\n'))
+                        {
+                            system("clear");
+                            cout<<"Invalid Input"<<endl;
+                        }
                     yesOrNo = 'x';
 
                     if(quantity%5!=0)
@@ -305,8 +326,9 @@ Team merchantMenu(Team x, int numLevelsCleared)
                     break;
 
             case 2:
+            {
 
-                    int choice2;
+                    int choice2 = 5;
                     
                     cout<<"I have a several types of cookware, which one would you like?"<<endl;
                     cout<<"Each type has a different probability of breaking when used, marked with (XX%)."<<endl;
@@ -320,7 +342,20 @@ Team merchantMenu(Team x, int numLevelsCleared)
                     cout<< "2. (10%) Frying Pan ["<<merchant.getFryingPanCost()<<" Gold]"<<endl;
                     cout<< "3. ( 2%) Cauldron ["<<merchant.getCauldronCost()<<" Gold]"<<endl;
                     cout<< "4. Cancel"<<endl;
-                    cin>>choice2;
+
+                    string temp;
+
+        cin >> temp;
+           if (temp == "1"||temp=="2"||temp=="3"||temp=="4"||temp == "5"||temp=="6")
+        {
+        choice2 = stoi(temp);
+        }
+
+        else
+        {
+            choice2 = 7;
+        }
+             
                     
                     if (option < 1 || option > 4) {
                     cout << "Invalid Input." << endl;
@@ -336,6 +371,12 @@ Team merchantMenu(Team x, int numLevelsCleared)
                                 {
                                 cout<<"How many would you like? (Enter a positive integer, or 0 to cancel)"<<endl;
                                 cin>>quantity;
+                                cin.clear();
+                        if(cin.ignore(numeric_limits<streamsize>::max(), '\n'))
+                        {
+                            system("clear");
+                            cout<<"Invalid Input"<<endl;
+                        }
                                 yesOrNo = 'x';
                                 if(quantity ==0)
                                 {
@@ -406,6 +447,12 @@ Team merchantMenu(Team x, int numLevelsCleared)
                                 {
                                 cout<<"How many would you like? (Enter a positive integer, or 0 to cancel)"<<endl;
                                 cin>>quantity;
+                                cin.clear();
+                    if(cin.ignore(numeric_limits<streamsize>::max(), '\n'))
+                        {
+                            system("clear");
+                            cout<<"Invalid Input"<<endl;
+                        }
                                 yesOrNo = 'x';
                                 if(quantity ==0)
                                 {
@@ -433,6 +480,7 @@ Team merchantMenu(Team x, int numLevelsCleared)
                                             {
                                             x.setCookware(AddFryingPan);
                                             x.setGold(x.getGold()-merchant.getFryingPanCost());
+                                            
                                             FCookwareQuantity++;
                                             }
                                             cout<<"Thank you for your patronage! What else can I get for you?"<<endl;
@@ -478,6 +526,12 @@ Team merchantMenu(Team x, int numLevelsCleared)
                                
                                 
                                 cin>>quantity;
+                                cin.clear();
+                        if(cin.ignore(numeric_limits<streamsize>::max(), '\n'))
+                        {
+                            system("clear");
+                            cout<<"Invalid Input"<<endl;
+                        }
                                 
                                 yesOrNo = 'x';
                                 if(quantity ==0)
@@ -548,11 +602,10 @@ Team merchantMenu(Team x, int numLevelsCleared)
                         
                        
 
-                       default: 
-                                cout<<"Invalid Input."<<endl; 
+                       
                     }
                 }
-                    
+            }
                     
                     break;
             
@@ -584,7 +637,22 @@ Team merchantMenu(Team x, int numLevelsCleared)
                                 {
                                 cout<<"Which weapon do you want to remove?"<<endl;
                                 cout<<"1) "<<x.getWeapons().at(0).getName()<<" 2) "<<x.getWeapons().at(1).getName()<<" 3) "<<x.getWeapons().at(2).getName()<<" 4) "<<x.getWeapons().at(3).getName()<<" 5) "<<x.getWeapons().at(4).getName()<<endl;
-                                cin>>weaponRemoveIndex;
+                                string temp;
+
+        cin >> temp;
+           if (temp == "1"||temp=="2"||temp=="3"||temp=="4"||temp == "5"||temp=="6")
+        {
+            weaponRemoveIndex = stoi(temp);
+        }
+
+        else
+        {
+            weaponRemoveIndex = 7;
+        }
+        
+        
+   
+                             
 
                                     if(weaponRemoveIndex>5||weaponRemoveIndex<1)
                                     {
@@ -726,9 +794,6 @@ Team merchantMenu(Team x, int numLevelsCleared)
 
                                                 break;
 
-                                    default:
-
-                                                break;
                                                 
                                      }
 
@@ -759,7 +824,22 @@ Team merchantMenu(Team x, int numLevelsCleared)
                     cout<< "5. (+3) Vorpal Longsword ["<<merchant.getLongswordCost()<<" Gold]"<<endl;
                     cout<< "6. Cancel"<<endl;
                     cout<<""<<endl;
-                    cin>>choice3;
+                    string temp;
+
+        cin >> temp;
+           if (temp == "1"||temp=="2"||temp=="3"||temp=="4"||temp == "5"||temp=="6")
+        {
+            choice3 = stoi(temp);
+        }
+
+        else
+        {
+            choice3 = 7;
+        }
+        
+        
+    
+                    
                     
                     if (choice3 < 1 || choice3 > 6) {
                     cout << "Invalid Input." << endl;
@@ -776,6 +856,12 @@ Team merchantMenu(Team x, int numLevelsCleared)
                                 cout<<"How many would you like? (Enter a positive integer, or 0 to cancel)"<<endl;
                                 yesOrNo = 'x';
                                 cin>>quantity;
+                                cin.clear();
+                       if(cin.ignore(numeric_limits<streamsize>::max(), '\n'))
+                        {
+                            system("clear");
+                            cout<<"Invalid Input"<<endl;
+                        }
                                 if(quantity ==0)
                                 {
                                     choice3 = 6;
@@ -850,6 +936,12 @@ Team merchantMenu(Team x, int numLevelsCleared)
                                 cout<<"How many would you like? (Enter a positive integer, or 0 to cancel)"<<endl;
                                 yesOrNo = 'x';
                                 cin>>quantity;
+                                cin.clear();
+                        if(cin.ignore(numeric_limits<streamsize>::max(), '\n'))
+                        {
+                            system("clear");
+                            cout<<"Invalid Input"<<endl;
+                        }
                                 if(quantity ==0)
                                 {
                                     choice3 = 6;
@@ -926,6 +1018,12 @@ Team merchantMenu(Team x, int numLevelsCleared)
                                 cout<<"How many would you like? (Enter a positive integer, or 0 to cancel)"<<endl;
                                 yesOrNo = 'x';
                                 cin>>quantity;
+                                cin.clear();
+                        if(cin.ignore(numeric_limits<streamsize>::max(), '\n'))
+                        {
+                            system("clear");
+                            cout<<"Invalid Input"<<endl;
+                        }
                                 if(quantity ==0)
                                 {
                                     choice3 = 6;
@@ -1002,6 +1100,12 @@ Team merchantMenu(Team x, int numLevelsCleared)
                                 cout<<"How many would you like? (Enter a positive integer, or 0 to cancel)"<<endl;
                                 yesOrNo = 'x';
                                 cin>>quantity;
+                                cin.clear();
+                        if(cin.ignore(numeric_limits<streamsize>::max(), '\n'))
+                        {
+                            system("clear");
+                            cout<<"Invalid Input"<<endl;
+                        }
                                 if(quantity ==0)
                                 {
                                     choice3 = 6;
@@ -1078,6 +1182,12 @@ Team merchantMenu(Team x, int numLevelsCleared)
                                 cout<<"How many would you like? (Enter a positive integer, or 0 to cancel)"<<endl;
                                 yesOrNo = 'x';
                                 cin>>quantity;
+                                cin.clear();
+                        if(cin.ignore(numeric_limits<streamsize>::max(), '\n'))
+                        {
+                            system("clear");
+                            cout<<"Invalid Input"<<endl;
+                        }
                                 if(quantity ==0)
                                 {
                                     choice3 = 6;
@@ -1148,8 +1258,8 @@ Team merchantMenu(Team x, int numLevelsCleared)
 
                                     break;
 
-                            default:
-                                        cout<<"Invalid Input.";
+                        
+                                       
                                 
                     }
                 }
@@ -1164,6 +1274,12 @@ Team merchantMenu(Team x, int numLevelsCleared)
                     {
                     cout<<"How many suits of armor can I get you? (Enter a positive integer, or 0 to cancel)"<<endl;
                     cin>>quantity;
+                    cin.clear();
+                       if(cin.ignore(numeric_limits<streamsize>::max(), '\n'))
+                        {
+                            system("clear");
+                            cout<<"Invalid Input"<<endl;
+                        }
                     yesOrNo = 'x';
 
                     if(quantity<0)
@@ -1233,6 +1349,7 @@ Team merchantMenu(Team x, int numLevelsCleared)
             case 5:
 
                      int choice5;
+                     choice5 = 7;
                 //     quantity = -1;
                 //     cout<<"Here is a list of how much I'll pay you for you treasures"<<endl;
                 //     cout<<"Which treasure(s) would you like to sell?"<<endl;
@@ -1544,7 +1661,22 @@ Team merchantMenu(Team x, int numLevelsCleared)
                     cout<< "5. Gem-encrusted goblet (G) - 50 gold pieces each"<<endl;
                     cout<< "6. Cancel"<<endl;
                     cout<<""<<endl;
-                    cin>>choice5;
+                    
+                    string temp;
+
+        cin >> temp;
+           if (temp == "1"||temp=="2"||temp=="3"||temp=="4"||temp == "5"||temp=="6")
+        {
+            choice5 = stoi(temp);
+        }
+
+        else
+        {
+            choice5 = 7;
+        }
+        
+        
+   
                     
                     if (choice5 < 1 || choice5 > 6) {
                     cout << "Invalid Input." << endl;
@@ -1561,6 +1693,12 @@ Team merchantMenu(Team x, int numLevelsCleared)
                                 cout<<"How many would you like to sell? (Enter a positive integer, or 0 to cancel)"<<endl;
                                 yesOrNo = 'x';
                                 cin>>quantity;
+                                cin.clear();
+                        if(cin.ignore(numeric_limits<streamsize>::max(), '\n'))
+                        {
+                            system("clear");
+                            cout<<"Invalid Input"<<endl;
+                        }
                                 if(quantity ==0)
                                 {
                                     choice5 = 6;
@@ -1646,6 +1784,12 @@ Team merchantMenu(Team x, int numLevelsCleared)
                                 cout<<"How many would you like to sell? (Enter a positive integer, or 0 to cancel)"<<endl;
                                 yesOrNo = 'x';
                                 cin>>quantity;
+                                cin.clear();
+                        if(cin.ignore(numeric_limits<streamsize>::max(), '\n'))
+                        {
+                            system("clear");
+                            cout<<"Invalid Input"<<endl;
+                        }
                                 if(quantity ==0)
                                 {
                                     choice5 = 6;
@@ -1732,6 +1876,12 @@ Team merchantMenu(Team x, int numLevelsCleared)
                                 cout<<"How many would you like to sell? (Enter a positive integer, or 0 to cancel)"<<endl;
                                 yesOrNo = 'x';
                                 cin>>quantity;
+                                cin.clear();
+                        if(cin.ignore(numeric_limits<streamsize>::max(), '\n'))
+                        {
+                            system("clear");
+                            cout<<"Invalid Input"<<endl;
+                        }
                                 if(quantity ==0)
                                 {
                                     choice5 = 6;
@@ -1818,6 +1968,12 @@ Team merchantMenu(Team x, int numLevelsCleared)
                                 cout<<"How many would you like to sell? (Enter a positive integer, or 0 to cancel)"<<endl;
                                 yesOrNo = 'x';
                                 cin>>quantity;
+                                cin.clear();
+                        if(cin.ignore(numeric_limits<streamsize>::max(), '\n'))
+                        {
+                            system("clear");
+                            cout<<"Invalid Input"<<endl;
+                        }
                                 if(quantity ==0)
                                 {
                                     choice5 = 6;
@@ -1904,6 +2060,12 @@ Team merchantMenu(Team x, int numLevelsCleared)
                                 cout<<"How many would you like to sell? (Enter a positive integer, or 0 to cancel)"<<endl;
                                 yesOrNo = 'x';
                                 cin>>quantity;
+                                cin.clear();
+                        if(cin.ignore(numeric_limits<streamsize>::max(), '\n'))
+                        {
+                            system("clear");
+                            cout<<"Invalid Input"<<endl;
+                        }
                                 if(quantity ==0)
                                 {
                                     choice5 = 6;
@@ -1984,8 +2146,7 @@ Team merchantMenu(Team x, int numLevelsCleared)
 
                                     break;
 
-                            default:
-                                        cout<<"Invalid Input.";
+                            
                                 
                     }
                 }
@@ -2000,6 +2161,8 @@ Team merchantMenu(Team x, int numLevelsCleared)
                     while(yesOrNo!='y'&&yesOrNo!='n')
                     {
                     cout<<"Are you sure you're finished? You won't be able to buy anything else from me! (y/n)"<<endl;
+  
+
                     cin>>yesOrNo;
                     if(yesOrNo!='y'&&yesOrNo!='n')
                     {
@@ -2018,10 +2181,11 @@ Team merchantMenu(Team x, int numLevelsCleared)
 
                     break;
                
-            default: cout << "Invalid input." << endl;
+           
         }
 
     }
+    system("clear");
 
     return x;
     }

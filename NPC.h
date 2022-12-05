@@ -1,63 +1,59 @@
+// CSCI 1300 Fall 2022
+// Author: Adithya Narayanan & Benjamin E Apelman 
+// Recitation: 106 –Chanheum Park (Adithya)
+// Recitation: Section 105 – Raegan Rychecky (Benjamin)
+// Project 3 
+
 #include <iostream>
 #include <vector>
 #include <fstream>
 #include "Team.h"
-#include "Weapons.h"
 #include "Player.h"
 #include "Merchant.h"
-#include "attack.h"
+
 #include "MerchantMenu.h"
 using namespace std;
 
 
+/** Algorithm:
+ * Generate a radom number
+ * Use that number to pick a random riddle from the vector of riddles stored in team as a datamember
+ * split the riddle into the question and the correct response
+ * output the riddle
+ * If the respose is correct call the merchant function
+ * If the response is incorrect generate a monster and call the attack function
+ * 
+*/
 
-// Must somehow pass in number of rooms cleared
-// How to only read the file once?
-// Or how to use ofstream to modifiy the file so that each monster is deleted after it is called?
-// If the riddle is corredt How to not span and npc?
-void NPC(Team exTeam)
+
+
+Team NPC(Team exTeam,Map map)
 {
     srand(time(0));
+    int randomNumber = rand() % exTeam.getRiddle().size();
 
-    // Read "riddles.txt"
-    fstream Riddles;
-    Riddles.open("riddles.txt");
-    if (Riddles.fail())
-    {
-        cout << "Failed to open Riddles.txt." << endl;
-    }
+    
 
-    // Vectors used to store the riddle and correct response
-    vector<string> listOfRiddles;
-    vector<string> correctResponse;
+    string riddleAndResponse = exTeam.getRiddle().at(randomNumber);
+    exTeam.getRiddle().at(randomNumber).erase();
 
-    // Variables used to process the text file
-    string theLine;
-    string lineSegment_a[2];
+   
 
-    while (!Riddles.eof())
-    {
-        getline(Riddles, theLine);
-        split(theLine, '~', lineSegment_a, 2);
+    string array[2];
 
-        listOfRiddles.push_back(lineSegment_a[0]);
-        correctResponse.push_back(lineSegment_a[1]);
-
-        lineSegment_a[0] = "";
-        lineSegment_a[1] = "";
-    }
-
-    int riddleIndex = rand() % 20;
+    split(riddleAndResponse, '~', array, 2);
   
    
-    cout << "Here is my riddle " << listOfRiddles.at(riddleIndex) << endl;
-    cout<<correctResponse.at(riddleIndex)<<endl;
+    cout << "Here is my riddle " << array[0] << endl;
+
+    exTeam.eraseRiddleAt(randomNumber);
+    
     string response = "";
     cin >> response;
-    cout<<"--------------"<<endl;
-    string CorrectResponse = correctResponse.at(riddleIndex);
+   
+    string CorrectResponse = array[1];
 
-    cout<<response<<endl;
+   
     string Response = response;
     if (Response == CorrectResponse.substr(0,Response.length()))
     {
@@ -65,22 +61,29 @@ void NPC(Team exTeam)
         cout << "Correct!" << endl;
         // If the riddle is corrrect go to merchant menu
         int roomsCleared = exTeam.getNumRoomsCleared();
-        merchantMenu(exTeam, roomsCleared);
+           map.removeNPC(map.getPlayerRow(),map.getPlayerCol());
+       exTeam =  merchantMenu(exTeam, roomsCleared);
         cout<<""<<endl;
-        return;
+        return exTeam;
     }
-    else if(response!=correctResponse.at(riddleIndex))
+    else if(response!=array[1])
     {
-       int x = Response.compare(CorrectResponse);
-       cout<<x<<endl;
+       
+      
   
-       cout<<Response.length()<<endl;
-       cout<<CorrectResponse.length()<<endl;
-        Monster randomMonster = getRandomMonster(exTeam.getNumRoomsCleared(),exTeam);
-        attack(exTeam, randomMonster);
-
+      
+        Monster randomMonster;
+        attack(exTeam, randomMonster,map);
+        map.removeNPC(map.getPlayerRow(),map.getPlayerCol());
+      
       
 
-        return;
+
+        return exTeam;
     } // Else brace (wrong answer to riddle)
+
+    
+    
+
+    return exTeam;
 }

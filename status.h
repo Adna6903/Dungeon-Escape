@@ -1,9 +1,21 @@
+// CSCI 1300 Fall 2022
+// Author: Adithya Narayanan & Benjamin E Apelman 
+// Recitation: 106 –Chanheum Park (Adithya)
+// Recitation: Section 105 – Raegan Rychecky (Benjamin)
+// Project 3 
+
 #include <iostream>
 #include "Team.h"
 using namespace std;
 
+/** Algorithm
+ * Display Every member variable of team
+ * This is done by using the preconstruced getter
+ * display the treausers by traversing the vector of treasures
+ * Return the team withouth mutating it 
+*/
 
-    int status(Team x)
+     Team status(Team x)
     {
 
         
@@ -154,7 +166,7 @@ using namespace std;
 
          for(int i = 0; i<x.getWeapons().size(); i++)
         {
-            if(x.getWeapons()[i].getName()=="Bettle Axe")
+            if(x.getWeapons()[i].getName()=="Battle Axe")
             {
                 BWeaponQuantity++;
 
@@ -209,5 +221,5 @@ using namespace std;
 
 
 
-        return 0;
+        return x;
     }

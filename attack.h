@@ -1,3 +1,8 @@
+// CSCI 1300 Fall 2022
+// Author: Adithya Narayanan & Benjamin E Apelman 
+// Recitation: 106 –Chanheum Park (Adithya)
+// Recitation: Section 105 – Raegan Rychecky (Benjamin)
+// Project 3 
 #include <iostream>
 #include <vector>
 #include <stdio.h>
@@ -5,7 +10,7 @@
 #include <time.h>
 #include <fstream>
 #include "Team.h"
-#include "Weapons.h"
+
 #include "Player.h"
 #include "Merchant.h"
 #include "Monster.h"
@@ -14,90 +19,64 @@
 using namespace std;
 
 
-
+/** Algorithm:
+ * Generate two random numbers
+ * Find a monster with a difficulty coresponding to the number of rooms cleared
+ * Warn the user of the monster
+ * Calculate the combat score based on two random numbers, the number of weapons/ armor, and the diffuculty of the monster
+ * If the user wins erase the monster and there is a chance that they find something
+ * If the monster wins erase one of the players
+ */
 
 
 // How to make it so the monster never appears aggain?
-// How to adjust the playesr fulness points mid function?
-Monster getRandomMonster(int numLevelsCleared,Team exTeam)
-{
-       ifstream monstersText;
-
-        monstersText.open("Monsters.txt");
-        if (monstersText.fail())
-        {
-            cout << "Failed to open Monsters.txt." << endl;
-        }
-
-        // Vectors to store the name and difficulty
-        vector<string> monsterName;
-        vector<int> monsterRating;
-
-        // Variables used to process the text file
-        string line = "";
-        string lineSegment[2];
-        
-
-
-        // Read the file and pass it into the vectors
-        while (getline(monstersText, line))
-        {
-            
-            split(line, ',', lineSegment, 2);
-
-            monsterName.push_back(lineSegment[0]);
-            monsterRating.push_back(stoi(lineSegment[1]));
-
-            lineSegment[0] = "";
-            lineSegment[1] = "";
-        }
-
-        // Generate random monster
-        string name;
-        int challangeRating = 999;
-        int random;
-        int numberOfRoomsCleared = exTeam.getNumRoomsCleared();
-
-       
-        while(challangeRating>=numLevelsCleared+2)
-        {
-             challangeRating = 0; 
-             name = "";
-             
-             random = rand() % 21;
-
-            challangeRating = monsterRating.at(random);
-            name = monsterName.at(random);
-          
-
-        }
-        // while (challangeRating >= numberOfRoomsCleared)
-        // {
-        //     random = rand() % 21;
-
-        //     challangeRating = monsterRating.at(random);
-        //     name = monsterName.at(random);
-        // }
-
-        Monster randomMonster;
-
-        randomMonster.setDifficulty(challangeRating);
-        randomMonster.setName(name);
-
-        return randomMonster;
-    } // Else brace (wrong answer to riddle)
+// Else brace (wrong answer to riddle)
 
 
     
-Team attack(Team theTeam, Monster theMonster)
+Team attack(Team theTeam, Monster theMonster,Map map)
 {
     // Seed random numbers with time
     srand(time(0));
 
+   
+    
+        // Generate random monster
+        string name;
+        int challangeRating = 999;
+        int random;
+        int numberOfRoomsCleared = theTeam.getNumRoomsCleared();
+
+            
+       
+        while(challangeRating>=numberOfRoomsCleared+2)
+        {
+             challangeRating = 0; 
+             name = "";
+             
+             random = rand() % theTeam.getMonster().size();
+
+
+            string array[2];
+            string monsterAndRating = theTeam.getMonster().at(random);
+            split(monsterAndRating, ',', array, 2);
+
+            challangeRating = stoi(array[1]);
+
+            name = array[0];
+          
+
+        }
+
+      
+
+        theMonster.setDifficulty(challangeRating);
+        theMonster.setName(name);
+
     // Anounce the monster
     cout << theMonster.getName() << " ahead! They look hostile!" << endl;
 
-    if (theTeam.getWeapons().size() >=  1)
+    if (theTeam.getWeapons().size() >=  1&&theTeam.getArmor().size()>0)
     {
         cout << "Would you like to fight the monster? (y/n)" << endl;
         string response;
@@ -231,6 +210,12 @@ Team attack(Team theTeam, Monster theMonster)
             theTeam.setKeys(newKeys);
        
        }
+       map.removeRoom(map.getPlayerRow(),map.getPlayerCol());
+       theTeam.setNumRoomsCleared(theTeam.getNumRoomsCleared()+1);
+       
+       theTeam.eraseMonsterAt(random);
+
+       theTeam.setNumMonstersDefeated(1);
     }
     
     // If they lose the battle, the party loses a quarter of their gold reserves
@@ -261,153 +246,9 @@ Team attack(Team theTeam, Monster theMonster)
         }
 
         // Each player has a 10% chance of death (5% if they are wearing armor)
-        int randomNumber = (rand() % 100) + 1;
-        double peicesOfArmor = theTeam.getArmor().size();
-
-        if (peicesOfArmor == 0)
-        {
-
-            if (randomNumber1 > 10 && randomNumber1 <= 20)
-            {
-                cout << "Player one has died!" << endl;
-                theTeam.removePlayer(0);
-            }
-            if (randomNumber1 > 20 && randomNumber1 <= 30)
-            {
-                cout << "Player two has died!" << endl;
-                theTeam.removePlayer(1);
-            }
-            if (randomNumber1 > 30 && randomNumber1 <= 40)
-            {
-                cout << "Player three has died!" << endl;
-                theTeam.removePlayer(2);
-            }
-            if (randomNumber1 > 40 && randomNumber1 <= 50)
-            {
-                cout << "Player four has died!" << endl;
-                theTeam.removePlayer(3);
-            }
-        }
-        else if (peicesOfArmor == 1)
-        {
-
-            if (randomNumber1 > 10 && randomNumber1 <= 20)
-            {
-                cout << "Player one has died!" << endl;
-                theTeam.removePlayer(0);
-            }
-            if (randomNumber1 > 20 && randomNumber1 <= 30)
-            {
-                cout << "Player two has died!" << endl;
-                theTeam.removePlayer(1);
-            }
-            if (randomNumber1 > 30 && randomNumber1 <= 40)
-            {
-                cout << "Player three has died!" << endl;
-                theTeam.removePlayer(2);
-            }
-            if (randomNumber1 > 40 && randomNumber1 <= 50)
-            {
-                cout << "Player four has died!" << endl;
-                theTeam.removePlayer(3);
-            }
-        }
-        else if (peicesOfArmor == 2)
-        {
-
-            if (randomNumber1 > 10 && randomNumber1 <= 15)
-            {
-                cout << "Player one has died!" << endl;
-                theTeam.removePlayer(0);
-            }
-            if (randomNumber1 > 20 && randomNumber1 <= 30)
-            {
-                cout << "Player two has died!" << endl;
-                theTeam.removePlayer(1);
-            }
-            if (randomNumber1 > 30 && randomNumber1 <= 40)
-            {
-                cout << "Player three has died!" << endl;
-                theTeam.removePlayer(2);
-            }
-            if (randomNumber1 > 40 && randomNumber1 <= 50)
-            {
-                cout << "Player four has died!" << endl;
-                theTeam.removePlayer(3);
-            }
-        }
-        else if (peicesOfArmor == 3)
-        {
-
-            if (randomNumber1 > 10 && randomNumber1 <= 15)
-            {
-                cout << "Player one has died!" << endl;
-                theTeam.removePlayer(0);
-            }
-            if (randomNumber1 > 20 && randomNumber1 <= 25)
-            {
-                cout << "Player two has died!" << endl;
-                theTeam.removePlayer(1);
-            }
-            if (randomNumber1 > 30 && randomNumber1 <= 40)
-            {
-                cout << "Player three has died!" << endl;
-                theTeam.removePlayer(2);
-            }
-            if (randomNumber1 > 40 && randomNumber1 <= 50)
-            {
-                cout << "Player four has died!" << endl;
-                theTeam.removePlayer(3);
-            }
-        }
-        else if (peicesOfArmor == 4)
-        {
-
-            if (randomNumber1 > 10 && randomNumber1 <= 15)
-            {
-                cout << "Player one has died!" << endl;
-                theTeam.removePlayer(0);
-            }
-            if (randomNumber1 > 20 && randomNumber1 <= 25)
-            {
-                cout << "Player two has died!" << endl;
-                theTeam.removePlayer(1);
-            }
-            if (randomNumber1 > 30 && randomNumber1 <= 35)
-            {
-                cout << "Player three has died!" << endl;
-                theTeam.removePlayer(2);
-            }
-            if (randomNumber1 > 40 && randomNumber1 <= 50)
-            {
-                cout << "Player four has died!" << endl;
-                theTeam.removePlayer(3);
-            }
-        }
-        else if (peicesOfArmor == 5)
-        {
-
-            if (randomNumber1 > 10 && randomNumber1 <= 15)
-            {
-                cout << "Player one has died!" << endl;
-                theTeam.removePlayer(0);
-            }
-            if (randomNumber1 > 20 && randomNumber1 <= 25)
-            {
-                cout << "Player two has died!" << endl;
-                theTeam.removePlayer(1);
-            }
-            if (randomNumber1 > 30 && randomNumber1 <= 35)
-            {
-                cout << "Player three has died!" << endl;
-                theTeam.removePlayer(2);
-            }
-            if (randomNumber1 > 40 && randomNumber1 <= 45)
-            {
-                cout << "Player four has died!" << endl;
-                theTeam.removePlayer(3);
-            }
-        }
+        int randomNumber = (rand() % (theTeam.getPlayers().size()-1)) + 1;
+        theTeam.removePlayer(randomNumber);
+       
 
     } // Defeat brace
 
@@ -415,8 +256,15 @@ Team attack(Team theTeam, Monster theMonster)
     }
     else
     {
+        if(theTeam.getWeapons().size()<=0)
+        {
         cout << "You don't have any weapons, a player has been captured." << endl;
-        int index = theTeam.getPlayers().size();
+        }
+        else
+        {
+            cout<<"You don't have any armor, a player has been captured. "<<endl;
+        }
+        int index = theTeam.getPlayers().size()-1;
         theTeam.removePlayer(index);
         
 
@@ -424,12 +272,13 @@ Team attack(Team theTeam, Monster theMonster)
         int minusOneHP = rand() % 2 + 1;
         if (minusOneHP == 1)
         {
-            // Need a function in team to adjuest the fullnes point of a player
+            cout << "Each player has lost one fulness point" << endl;
+            for(int i = 0; i<theTeam.getPlayers().size(); i++)
+            {
+                theTeam.setPlayerFullnessPointsAt(theTeam.getPlayers().at(i).getFullnessPoints()- 1,i);
+            }
         }
-        else if (minusOneHP == 2)
-        {
-
-        }
+       
     }
    
     return theTeam;

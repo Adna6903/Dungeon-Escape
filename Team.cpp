@@ -1,9 +1,8 @@
 // CSCI 1300 Fall 2022
-// Author: Adithya Narayanan
-// Recitation: 106 –Chanheum Park
-// Author: Benjamin E Apelman 
-// Recitation: Section 105 – Raegan Rychecky
-// Project 3 Code Skeleton
+// Author: Adithya Narayanan & Benjamin E Apelman 
+// Recitation: 106 –Chanheum Park (Adithya)
+// Recitation: Section 105 – Raegan Rychecky (Benjamin)
+// Project 3 
 
 #include <iostream>
 #include <vector>
@@ -39,7 +38,17 @@ Team::Team(vector <Player> players)
 
    ingredients_ = 0;
 
-   armor_ = {0,0,0,0,0};
+   armor_ = {};
+
+   hasPlayerGivenUp = false;
+
+   mainPlayerName_ = players_.at(0).getPlayerName();
+
+   spacesExplored_ = 0;
+
+   numMonstersDefeated_ = 0;
+
+   turnsElapsed_ = 0;
 
 
 }
@@ -94,6 +103,47 @@ vector<int> Team::getArmor()
     return armor_;
 }
 
+bool Team::getGiveUp()
+{
+    return hasPlayerGivenUp;
+}
+
+int Team::getPotions()
+{
+    return potions_;
+}
+
+vector<string> Team::getMonster()
+{
+    return listOfMonsters_;
+}
+
+vector<string> Team::getRiddle()
+{
+    return listOfRiddles_;
+}
+
+string Team::getMainPlayerName()
+{
+    return mainPlayerName_;
+}
+
+int Team::getSpacesExplored()
+{
+    return spacesExplored_;
+}
+
+int Team::getNumMonstersDefeated()
+{
+    return numMonstersDefeated_;
+}
+
+int Team::getNumTurnsElapsed()
+{
+    return turnsElapsed_;
+}
+
+
 // Setters:
 
 void Team::setSorcererAngerLevel(int sorcererAngerLevel)
@@ -116,11 +166,28 @@ void Team::removePlayer(int index)
 
 void Team::setWeapons(vector<Weapons> weapons)
 {
-
-    for (int i = 0; i < weapons.size(); i++)
+    for(int i = 0; i<weapons.size();i++)
     {
-        weapons_.push_back(weapons[i]);
+        weapons_.push_back(weapons.at(i));
     }
+    
+    
+    // for(int i = 0; i < weapons_.size()-1;)
+    // {
+    //     for(int i = 0; i<weapons_.size()-1; i++)
+    //     {
+    //         if(weapons_.at(i).getLevel() > weapons_.at(i+1).getLevel())
+    //         {
+    //             vector<Weapons> temp;
+    //             temp.at(i) = weapons_.at(i);
+    //             weapons_.at(i) = weapons_.at(i+1);
+    //             weapons_.at(i+1) = temp.at(i);
+
+    //         }
+    //     }
+    // }
+       
+    
 }
 
 void Team::setTreasures(vector<string> treasures)
@@ -195,4 +262,65 @@ void Team::removeWeaponsAt(int index)
 
     weapons_.erase(weapons_.begin()+index);
 
+}
+
+void Team::setGiveUp(bool isGiveUp)
+{
+    hasPlayerGivenUp = isGiveUp;
+}
+
+void Team::removeArmorAt(int index)
+{
+    armor_.erase(armor_.begin()+index);
+}
+
+void Team::setPotions(int potions)
+{
+    potions_ = potions;
+}
+
+void Team::setRiddles(vector<string> listOfRiddles)
+{
+    listOfRiddles_ = listOfRiddles;
+}
+
+void Team::setMonsters(vector<string> listOfMonsters)
+{
+    listOfMonsters_ = listOfMonsters;
+}
+
+void Team::eraseMonsterAt(int index)
+{
+    listOfMonsters_.erase(listOfMonsters_.begin()+index);
+}
+
+void Team::eraseRiddleAt(int index)
+{
+    listOfRiddles_.erase(listOfRiddles_.begin()+index);
+}
+
+void Team::clearPlayers()
+{
+
+int playerSize = players_.size();
+
+    for(int i = 0; !players_.empty(); i++)
+    {
+        players_.pop_back();
+    }
+}
+
+void Team::setSpacesExplored(int spaces)
+{
+    spacesExplored_ = spacesExplored_ + spaces;
+}
+
+void Team::setNumMonstersDefeated(int numMonsters)
+{
+    numMonstersDefeated_ = numMonstersDefeated_ + numMonsters;
+}
+
+void Team::setTurnsElapsed(int turns)
+{
+    turnsElapsed_ = turnsElapsed_ + turns;
 }

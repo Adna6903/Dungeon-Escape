@@ -1,3 +1,8 @@
+// CSCI 1300 Fall 2022
+// Author: Adithya Narayanan & Benjamin E Apelman 
+// Recitation: 106 –Chanheum Park (Adithya)
+// Recitation: Section 105 – Raegan Rychecky (Benjamin)
+// Project 3 
 #include <iostream>
 #include <vector>
 #include <stdio.h>
@@ -5,11 +10,14 @@
 #include <time.h>
 #include <fstream>
 #include "Team.h"
-#include "Weapons.h"
+
 #include "Player.h"
 #include "Merchant.h"
 
 using namespace std;
+
+
+
 
 // If you have ingredients, you can choose to cook the ingredients into a meal. When cooking,
 // prompt the player to select which cookware item they want to use,
@@ -30,6 +38,9 @@ Team cooking(Team exTeam)
     srand(time(0));
 
     string response;
+    
+    
+   
     if (exTeam.getCookware().size() >= 1 && exTeam.getIngredients() >= 5)
     {
         cout << "Would you like to you to cook to restore a players health? (y/n) " << endl;
@@ -90,10 +101,17 @@ Team cooking(Team exTeam)
                 cout << "Each players health has been increaed by " << ingredientsUsed / 5 << endl;
                 for (int i = 0; i < exTeam.getPlayers().size(); i++)
                 {
+                    if(exTeam.getPlayers().at(i).getFullnessPoints()>=100)
+                    {
+                        cout<<"Player "<<exTeam.getPlayers().at(i).getPlayerName()<<" is already full. No health added"<<endl;
+                    }
+                    else
+                    {
                     int currentFullness = exTeam.getPlayers().at(i).getFullnessPoints();
                     int fulnessAdded = ingredientsUsed / 5;
                     int newFullness = currentFullness + fulnessAdded;
                     exTeam.setPlayerFullnessPointsAt(newFullness,i);
+                    }
                 }
             }
         }
@@ -107,13 +125,20 @@ Team cooking(Team exTeam)
             }
             else
             {
-                cout << "Each players health has been increaed by " << ingredientsUsed / 5 << endl;
+                 cout << "Each players health has been increaed by " << ingredientsUsed / 5 << endl;
                 for (int i = 0; i < exTeam.getPlayers().size(); i++)
                 {
+                    if(exTeam.getPlayers().at(i).getFullnessPoints()>=100)
+                    {
+                        cout<<"Player "<<exTeam.getPlayers().at(i).getPlayerName()<<" is already full. No health added"<<endl;
+                    }
+                    else
+                    {
                     int currentFullness = exTeam.getPlayers().at(i).getFullnessPoints();
                     int fulnessAdded = ingredientsUsed / 5;
                     int newFullness = currentFullness + fulnessAdded;
                     exTeam.setPlayerFullnessPointsAt(newFullness,i);
+                    }
                 }
             }
         }
@@ -127,13 +152,20 @@ Team cooking(Team exTeam)
             }
             else
             {
-                cout << "Each players health has been increaed by " << ingredientsUsed / 5 << endl;
+                 cout << "Each players health has been increaed by " << ingredientsUsed / 5 << endl;
                 for (int i = 0; i < exTeam.getPlayers().size(); i++)
                 {
+                    if(exTeam.getPlayers().at(i).getFullnessPoints()>=100)
+                    {
+                        cout<<"Player "<<exTeam.getPlayers().at(i).getPlayerName()<<" is already full. No health added"<<endl;
+                    }
+                    else
+                    {
                     int currentFullness = exTeam.getPlayers().at(i).getFullnessPoints();
                     int fulnessAdded = ingredientsUsed / 5;
                     int newFullness = currentFullness + fulnessAdded;
                     exTeam.setPlayerFullnessPointsAt(newFullness,i);
+                    }
                 }
             }
         }

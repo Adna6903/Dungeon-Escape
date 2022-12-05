@@ -1,3 +1,9 @@
+// CSCI 1300 Fall 2022
+// Author: Adithya Narayanan & Benjamin E Apelman 
+// Recitation: 106 –Chanheum Park (Adithya)
+// Recitation: Section 105 – Raegan Rychecky (Benjamin)
+// Project 3 
+
 #include "Map.h"
 
 
@@ -94,9 +100,9 @@ int Map::getDungeonExitCol()
 }
 
 // set player position, if in range
-void Map::setPlayerPosition(int row, int col,Team exTeam)
+void Map::setPlayerPosition(int row, int col)
 {
-    if (isOnMap(row, col, exTeam))
+    if (isOnMap(row, col))
     {
         player_position_[0] = row;
         player_position_[1] = col;
@@ -104,9 +110,9 @@ void Map::setPlayerPosition(int row, int col,Team exTeam)
 }
 
 // set dungeon exit position, if in range
-void Map::setDungeonExit(int row, int col,Team exTeam)
+void Map::setDungeonExit(int row, int col)
 {
-    if (isOnMap(row, col,exTeam))
+    if (isOnMap(row, col))
     {
         dungeon_exit_[0] = row;
         dungeon_exit_[1] = col;
@@ -137,7 +143,7 @@ int Map::getNumCols()
  * Parameters: row (int), col (int)
  * Returns: bool
  */
-bool Map::isOnMap(int row, int col,Team exTeam)
+bool Map::isOnMap(int row, int col)
 {
     if (0 <= row && row < num_rows_ && 0 <= col && col < num_cols_)
     {
@@ -159,11 +165,11 @@ bool Map::isOnMap(int row, int col,Team exTeam)
  * Parameters: none
  * Return: boolean (bool)
  */
-bool Map::isNPCLocation(int row, int col,Team exTeam)
+bool Map::isNPCLocation(int row, int col)
 {
     char yesOrNo;
     yesOrNo = 'x';
-    if (!isOnMap(row, col,exTeam))
+    if (!isOnMap(row, col))
     {
         return false;
     }
@@ -192,11 +198,11 @@ bool Map::isNPCLocation(int row, int col,Team exTeam)
  * Parameters: none
  * Return: boolean (bool)
  */
-bool Map::isRoomLocation(int row, int col,Team exTeam)
+bool Map::isRoomLocation(int row, int col)
 {
     char yesOrNo;
     yesOrNo = 'x';
-    if (!isOnMap(row, col,exTeam))
+    if (!isOnMap(row, col))
     {
         return false;
     }
@@ -222,9 +228,9 @@ bool Map::isRoomLocation(int row, int col,Team exTeam)
  * else:
  *     return false
  */
-bool Map::isExplored(int row, int col,Team exTeam)
+bool Map::isExplored(int row, int col)
 {
-    if (!isOnMap(row, col,exTeam))
+    if (!isOnMap(row, col))
     {
         return false;
     }
@@ -250,7 +256,7 @@ bool Map::isExplored(int row, int col,Team exTeam)
  * Algorithm: checks if (row, col) is dungeon_exit_
  *
  */
-bool Map::isDungeonExit(int row, int col, Team exTeam)
+bool Map::isDungeonExit(int row, int col)
 {
     if (row == dungeon_exit_[0] && col == dungeon_exit_[1])
     {
@@ -274,21 +280,21 @@ bool Map::isDungeonExit(int row, int col, Team exTeam)
  * Parameters: row (int), col (int)
  * Return: boolean (bool)
  */
-bool Map::isFreeSpace(int row, int col,Team exTeam)
+bool Map::isFreeSpace(int row, int col)
 {
-    if (!isOnMap(row, col,exTeam))
+    if (!isOnMap(row, col))
     {
         return false;
     }
-    if (isNPCLocation(row, col,exTeam))
+    if (isNPCLocation(row, col))
     {
         return false;
     }
-    if (isRoomLocation(row, col,exTeam))
+    if (isRoomLocation(row, col))
     {
         return false;
     }
-    if (isDungeonExit(row, col,exTeam))
+    if (isDungeonExit(row, col))
     {
         return false;
     }
@@ -310,13 +316,13 @@ bool Map::isFreeSpace(int row, int col,Team exTeam)
  * Parameters: row (int), col (int)
  * Return: boolean (bool)
  */
-bool Map::addNPC(int row, int col, Team exTeam)
+bool Map::addNPC(int row, int col)
 {
     if (npc_count_ >= max_npcs_)
     {
         return false;
     }
-    if (!isFreeSpace(row, col,exTeam))
+    if (!isFreeSpace(row, col))
     {
         return false;
     }
@@ -344,7 +350,7 @@ bool Map::addNPC(int row, int col, Team exTeam)
  * Parameters: row (int), col (int)
  * Return: boolean (bool)
  */
-bool Map::addRoom(int row, int col,Team exTeam)
+bool Map::addRoom(int row, int col)
 {
 
     if (room_count_ >= max_rooms_)
@@ -353,7 +359,7 @@ bool Map::addRoom(int row, int col,Team exTeam)
     }
 
     // location must be blank to spawn
-    if (!isFreeSpace(row, col, exTeam))
+    if (!isFreeSpace(row, col))
     {
         return false;
     }
@@ -450,7 +456,7 @@ bool Map::removeRoom(int row, int col)
  * Parameters: row (int), col (int)
  * Return: boolean (bool)
  */
-void Map::exploreSpace(int row, int col,Team exTeam)
+void Map::exploreSpace(int row, int col)
 {
     for (int i = 0; i < npc_count_; i++)
     {
@@ -461,7 +467,7 @@ void Map::exploreSpace(int row, int col,Team exTeam)
             return;
         }
     }
-    if (isFreeSpace(row, col,exTeam))
+    if (isFreeSpace(row, col))
     {
         map_data_[player_position_[0]][player_position_[1]] = EXPLORED;
     }
@@ -487,7 +493,7 @@ void Map::exploreSpace(int row, int col,Team exTeam)
  * Parameters: direction (char)
  * Return: boolean (bool)
  */
-bool Map::move(char direction, Team exTeam)
+bool Map::move(char direction)
 {
     // check input char and move accordingly
     switch (tolower(direction))
@@ -536,9 +542,9 @@ bool Map::move(char direction, Team exTeam)
         return false;
     }
     // if new location is an NPC location, mark as explored
-    if (isNPCLocation(player_position_[0], player_position_[1],exTeam))
+    if (isNPCLocation(player_position_[0], player_position_[1]))
     {
-        exploreSpace(player_position_[0], player_position_[1],exTeam);
+        exploreSpace(player_position_[0], player_position_[1]);
     }
     return true;
 }

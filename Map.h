@@ -1,9 +1,14 @@
+// CSCI 1300 Fall 2022
+// Author: Adithya Narayanan & Benjamin E Apelman 
+// Recitation: 106 –Chanheum Park (Adithya)
+// Recitation: Section 105 – Raegan Rychecky (Benjamin)
+// Project 3 
+
 #ifndef MAP_H
 #define MAP_H
 
 #include <iostream>
-#include "Team.h"
-#include "Player.h"
+
 
 using namespace std;
 
@@ -48,27 +53,27 @@ public:
     int getNPCCount();
     int getNumRows();
     int getNumCols();
-    bool isOnMap(int row, int col,Team exTeam);
-    bool isNPCLocation(int row, int col,Team exTeam);
-    bool isRoomLocation(int row, int col, Team exTeam);
-    bool isExplored(int row, int col,Team exTeam);
-    bool isFreeSpace(int row, int col,Team exTeam);
-    bool isDungeonExit(int row, int col, Team exTeam);
+    bool isOnMap(int row, int col);
+    bool isNPCLocation(int row, int col);
+    bool isRoomLocation(int row, int col);
+    bool isExplored(int row, int col);
+    bool isFreeSpace(int row, int col);
+    bool isDungeonExit(int row, int col);
     
     
     // setters
-    void setPlayerPosition(int row, int col,Team exTeam);
-    void setDungeonExit(int row, int col,Team exTeam);
+    void setPlayerPosition(int row, int col);
+    void setDungeonExit(int row, int col);
     
 
     // other
     void displayMap();
-    bool move(char,Team exTeam);
-    bool addNPC(int row, int col,Team exTeam);
-    bool addRoom(int row, int col,Team exTeam);
+    bool move(char);
+    bool addNPC(int row, int col);
+    bool addRoom(int row, int col);
     bool removeNPC(int row, int col);
     bool removeRoom(int row, int col);
-    void exploreSpace(int row, int col,Team exTeam);
+    void exploreSpace(int row, int col);
 };
 
 #endif
