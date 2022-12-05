@@ -13,11 +13,9 @@ Monster.h, NPC.h, Player.h, Restults.h, startGame.h, status.h, Team.h, Weapons.h
 ------------------------
 SUBMISSION INFORMATION
 ------------------------
-CSCI 1300 Fall 2022
+
 Author: Adithya Narayanan & Benjamin E Apelman 
-Recitation: 106 –Chanheum Park (Adithya)
-Recitation: Section 105 – Raegan Rychecky (Benjamin)
-Project 3 
+
 
 ------------------------
 ABOUT THIS PROJECT
