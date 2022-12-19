@@ -1,9 +1,4 @@
 
-// CSCI 1300 Fall 2022
-// Author: Adithya Narayanan & Benjamin E Apelman 
-// Recitation: 106 –Chanheum Park (Adithya)
-// Recitation: Section 105 – Raegan Rychecky (Benjamin)
-// Project 3 
 
 #ifndef WEAPONS_H
 #define WEAPONS_H

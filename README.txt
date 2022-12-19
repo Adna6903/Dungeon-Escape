@@ -13,21 +13,15 @@ Monster.h, NPC.h, Player.h, Restults.h, startGame.h, status.h, Team.h, Weapons.h
 ------------------------
 SUBMISSION INFORMATION
 ------------------------
-
-Author: Adithya Narayanan & Benjamin E Apelman 
-
-
+CSCI1300 Fall 2022 Project 3
+Author: Sansh Goel
+Recitation: 202- Christopher
+Date: Nov 30, 2022
 ------------------------
 ABOUT THIS PROJECT
 ------------------------
-Dungeon Escape
-
-Each session differs from the next, depending on the story made up by the dungeon master and the way the players react to that story. 
-But most commonly, the game consists of a party of players making their way through a dungeon by fighting monsters, solving puzzles, 
-and interacting with characters.Our game will use this general blueprint as inspiration. 
-An evil Sorcerer has captured a group of players and trapped them in a monster-filled, labyrinthine dungeon for their own amusement. 
-The goal of this game is to make it out of the dungeon with as many party members alive as possible.
-Each turn in the dungeon makes you hungrier (reduces fullness) and has risks such as monsters and traps.
-You can fight monsters, speak to NPCs, and explore, but you must make it through the dungeon before the Sorcerer
-runs out of patience and destroys the dungeon, along with the player and all the party members!
-
+This project is about creting a game called Dugeon Escape. The basic idea of this project is to escape the Dugeon 
+and for that the player needs to clear all the 5 rooms. Rooms require keys to be cleared. Keys can be found randomly 
+in the map along with treasure and some health portions. Also, player can get a key by defeating the monster
+that is randomly spawned in the map. After clearing the rooms the player escpaes the Dugeon. But, before that
+player needs to fight the sorcerer. If the player successfuly defeats the sorcerer the player wins and the game ends.
