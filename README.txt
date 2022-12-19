@@ -14,9 +14,7 @@ Monster.h, NPC.h, Player.h, Restults.h, startGame.h, status.h, Team.h, Weapons.h
 SUBMISSION INFORMATION
 ------------------------
 CSCI1300 Fall 2022 Project 3
-Author: Sansh Goel
-Recitation: 202- Christopher
-Date: Nov 30, 2022
+Author: Adithya Narayanan
 ------------------------
 ABOUT THIS PROJECT
 ------------------------
