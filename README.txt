@@ -14,7 +14,7 @@ Monster.h, NPC.h, Player.h, Restults.h, startGame.h, status.h, Team.h, Weapons.h
 SUBMISSION INFORMATION
 ------------------------
 CSCI1300 Fall 2022 Project 3
-Author: Adithya Narayanan
+
 ------------------------
 ABOUT THIS PROJECT
 ------------------------
